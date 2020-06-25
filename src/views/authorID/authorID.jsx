@@ -66,13 +66,9 @@ class AuthorID extends Component {
           Analyze
         </button>
         <div className="otherContent">
-          <span className="bodyLabel">Removed stopwords</span>
+          <span className="bodyLabel">Author Results</span>
           <div className="text">
             <span>{this.state.textWithoutStopwords}</span>
-          </div>
-          <span className="bodyLabel">Stemmed</span>
-          <div className="text">
-            <span>{this.state.stemmedText}</span>
           </div>
         </div>
       </div>
