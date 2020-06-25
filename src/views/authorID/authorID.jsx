@@ -48,8 +48,8 @@ class AuthorID extends Component {
   render() {
     return (
       <div className="appContainer">
-        <h2>Welcome! Author ID</h2>
-        <h4>Enter some text below</h4>
+        <h2><i>Welcome to Author ID!!</i></h2>
+        <h4>Enter your article below... </h4>
         <form className="form">
           <label className="formLabel">Raw text</label>
           <textarea
@@ -66,7 +66,7 @@ class AuthorID extends Component {
           Analyze
         </button>
         <div className="otherContent">
-          <span className="bodyLabel">Author Results</span>
+          <span className="bodyLabel"><b>Predicted Author</b></span>
           <div className="text">
             <span>{this.state.textWithoutStopwords}</span>
           </div>
