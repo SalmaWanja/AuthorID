@@ -4,41 +4,24 @@ import axios from "axios";
 class AuthorID extends Component {
   constructor(props) {
     super(props);
-    this.state = { rawText: "", textWithoutStopwords: "", stemmedText: "" };
+    this.state = { rawText: "", prediction:"" };
     this.handleChange = this.handleChange.bind(this);
-    this.removeStopwords = this.removeStopwords.bind(this);
-    this.stem = this.stem.bind(this);
+    this.getprediction = this.getPrediction.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.id]: e.target.value });
   }
-  removeStopwords() {
+  getPrediction() {
     //   submit data to api
     console.log(this.state.rawText);
     axios
-      .post("http://127.0.0.1:5000/author_id/api/remove_stopwords", {
+      .post("http://127.0.0.1:5000/author_id/api/predict_class", {
         raw_text: this.state.rawText
       })
       .then(response => {
         console.log(response);
-        this.setState({ textWithoutStopwords: response.data.processed_text });
-        this.stem(response.data.processed_text);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  stem(text) {
-    //   submit data to api
-    axios
-      .post("http://127.0.0.1:5000/author_id/api/stem", {
-        raw_text: text
-      })
-      .then(response => {
-        console.log(response);
-        this.setState({ stemmedText: response.data.processed_text });
+        this.setState({ prediction: response.data.predicted_class });
       })
       .catch(err => {
         console.log(err);
@@ -50,6 +33,7 @@ class AuthorID extends Component {
       <div className="appContainer">
         <h2><i>Welcome to Author ID!!</i></h2>
         <h4>Enter your article below... </h4>
+        
         <form className="form">
           <label className="formLabel">Raw text</label>
           <textarea
@@ -62,13 +46,13 @@ class AuthorID extends Component {
             placeholder="Enter some text to analyze"
           />
         </form>
-        <button className="submitButton" onClick={() => this.removeStopwords()}>
+        <button className="submitButton" onClick={() => this.getPrediction()}>
           Analyze
         </button>
         <div className="otherContent">
           <span className="bodyLabel"><b>Predicted Author</b></span>
           <div className="text">
-            <span>{this.state.textWithoutStopwords}</span>
+            <span>{this.state.prediction}</span>
           </div>
         </div>
       </div>
