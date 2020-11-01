@@ -21,7 +21,7 @@ class AuthorID extends Component {
       })
       .then(response => {
         console.log(response);
-        this.props.history.push('/results', { prediction: response.data.predicted_class })
+        this.props.history.push('/results', { prediction: response.data })
         // this.setState({ prediction: response.data.predicted_class });
       })
       .catch(err => {

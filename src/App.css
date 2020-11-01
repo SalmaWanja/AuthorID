@@ -62,7 +62,7 @@
 }
 .text{
   box-sizing: border-box;
-  height: 100px;
+  /* height: 100px; */
   text-align: left;
   font-weight: 400;
   padding: 15px;
