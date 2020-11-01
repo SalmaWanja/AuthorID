@@ -4,7 +4,7 @@ import axios from "axios";
 class AuthorID extends Component {
   constructor(props) {
     super(props);
-    this.state = { rawText: "", prediction:"" };
+    this.state = { rawText: "", prediction: "" };
     this.handleChange = this.handleChange.bind(this);
     this.getprediction = this.getPrediction.bind(this);
   }
@@ -21,7 +21,8 @@ class AuthorID extends Component {
       })
       .then(response => {
         console.log(response);
-        this.setState({ prediction: response.data.predicted_class });
+        this.props.history.push('/results', { prediction: response.data.predicted_class })
+        // this.setState({ prediction: response.data.predicted_class });
       })
       .catch(err => {
         console.log(err);
@@ -33,7 +34,7 @@ class AuthorID extends Component {
       <div className="appContainer">
         <h2><i>Welcome to Author ID!!</i></h2>
         <h4>Enter your article below... </h4>
-        
+
         <form className="form">
           <label className="formLabel">Raw text</label>
           <textarea
@@ -42,19 +43,13 @@ class AuthorID extends Component {
             onChange={this.handleChange}
             className="formField"
             rows={4}
-            value = {this.state.rawText}
+            value={this.state.rawText}
             placeholder="Enter some text to analyze"
           />
         </form>
         <button className="submitButton" onClick={() => this.getPrediction()}>
           Analyze
         </button>
-        <div className="otherContent">
-          <span className="bodyLabel"><b>Predicted Author</b></span>
-          <div className="text">
-            <span>{this.state.prediction}</span>
-          </div>
-        </div>
       </div>
     );
   }
